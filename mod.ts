@@ -1,9 +1,5 @@
 const webhookURL = Deno.env.get("WEBHOOK_URL");
 
-if (!webhookURL) {
-  throw new Error("WEBHOOK_URL env variable is not defined");
-}
-
 /** Options for sending a message */
 export interface SendMessageOptions {
   content: string;
@@ -13,6 +9,10 @@ export interface SendMessageOptions {
 
 /** Send a message to a discord channel */
 export async function sendMessage(options: SendMessageOptions) {
+  if (!webhookURL) {
+    throw new Error("WEBHOOK_URL env variable is not defined");
+  }
+
   const req = await fetch(webhookURL, {
     method: "POST",
     headers: {
