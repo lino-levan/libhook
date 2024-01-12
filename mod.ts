@@ -15,6 +15,7 @@ export async function sendMessage(options: SendMessageOptions) {
       console.warn("WEBHOOK_URL env variable is not defined");
     }
     warned = true;
+    return;
   }
 
   const req = await fetch(webhookURL, {
